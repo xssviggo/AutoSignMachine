@@ -31,8 +31,8 @@ jobs:
     - name: Verification
       run: |
         ls -la ~/.AutoSignMachine/
-        cat ~/.AutoSignMachine/*.txt
-        cat ~/.AutoSignMachine/*.json
+        cat ~/.AutoSignMachine/*.txt || true
+        cat ~/.AutoSignMachine/*.json || true
     - name: Set time zone
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
     - name: Install dependencies
