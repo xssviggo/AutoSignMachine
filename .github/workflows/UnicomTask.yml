@@ -28,6 +28,11 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
+    - name: Verification
+      run: |
+        ls -la ~/.AutoSignMachine/
+        cat ~/.AutoSignMachine/*.txt
+        cat ~/.AutoSignMachine/*.json
     - name: Set time zone
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
     - name: Install dependencies
@@ -38,4 +43,5 @@ jobs:
         USERS_UNICOM_CONFIG: ${{ secrets.USERS_UNICOM_CONFIG }}
       run: |
         echo "$USERS_UNICOM_CONFIG" > ./config/.env
+        cat ./config/.env
         node index.js unicom
