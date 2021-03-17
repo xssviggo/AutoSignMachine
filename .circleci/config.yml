@@ -18,8 +18,8 @@ jobs:
           name: Run task
           command: |
               ls -l
-              ls -la ~/.AutoSignMachine/
-              cat ~/.AutoSignMachine/taskFile*
+              ls -la ~/.AutoSignMachine/ || true
+              cat ~/.AutoSignMachine/taskFile* || true
               echo $USERS_UNICOM_CONFIG > ./config/.env
               cat ./config/.env | wc -l
               node index.js unicom
