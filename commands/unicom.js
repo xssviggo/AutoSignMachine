@@ -84,6 +84,7 @@ exports.handler = async function (argv) {
         tryrun: "tryrun" in argv,
         taskKey: account.user,
       });
+      console.log("hasTasks: ", hasTasks);
       if (hasTasks) {
         scheduler
           .execTask(command, account.tasks)
