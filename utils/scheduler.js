@@ -217,6 +217,7 @@ let scheduler = {
       await scheduler.genFileName(command);
       await scheduler.initTasksQueue();
       let { will_queues } = await scheduler.loadTasksQueue();
+      console.log("will_queues", will_queues);
       scheduler.isRunning = true;
       return will_queues.length;
     }
