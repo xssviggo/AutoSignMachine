@@ -20,8 +20,10 @@ jobs:
               ls -l
               ls -la ~/.AutoSignMachine/ || true
               cat ~/.AutoSignMachine/taskFile* || true
-              echo $USERS_UNICOM_CONFIG > ./config/.env
-              cat ./config/.env
+              echo $UNICOM_USERNAME > ./config/.env
+              echo $UNICOM_PASSWORD >> ./config/.env
+              echo $UNICOM_APPID >> ./config/.env
+              cat ./config/.env | wc -l
               node index.js unicom
       - save_cache:
           key: private-file-v1
