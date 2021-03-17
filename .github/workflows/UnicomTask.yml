@@ -37,11 +37,13 @@ jobs:
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
     - name: Install dependencies
       run: |
+        ls -l
         npm install
-    - name: Build and publish
+        ls -l
+    - name: Run Sign Task
       env:
         USERS_UNICOM_CONFIG: ${{ secrets.USERS_UNICOM_CONFIG }}
       run: |
         echo "$USERS_UNICOM_CONFIG" > ./config/.env
-        cat ./config/.env
+        cat ./config/.env | wc -l
         node index.js unicom
