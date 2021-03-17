@@ -52,7 +52,8 @@ let scheduler = {
     for (let taskName of taskNames) {
       let options = tasks[taskName].options;
       let willTime = moment(randomDate(options));
-      let waitTime = options.dev ? 0 : Math.floor(Math.random() * 600);
+      // 任务随机 0 - 1 分钟
+      let waitTime = options.dev ? 0 : Math.floor(Math.random() * 60);
       if (options) {
         if (options.isCircle || options.dev) {
           willTime = moment().startOf("days");
