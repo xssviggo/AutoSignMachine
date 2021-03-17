@@ -24,7 +24,7 @@ const randomDate = (options) => {
   // eslint-disable-next-line prettier/prettier
   return new Date(
     +startDate.toDate() +
-      Math.random() * (endDate.toDate() - startDate.toDate())
+    Math.random() * (endDate.toDate() - startDate.toDate())
   );
 };
 let tasks = {};
@@ -236,9 +236,6 @@ let scheduler = {
   },
   execTask: async (command, selectedTasks) => {
     console.log("🤨 开始执行任务");
-    if (process.env.GITHUB_ACTIONS) {
-      return;
-    }
     await scheduler.fetchTasks(command);
     if (Object.prototype.toString.call(selectedTasks) == "[object String]") {
       selectedTasks = selectedTasks.split(",").filter((q) => q);
@@ -337,8 +334,7 @@ let scheduler = {
       }
       case 2:
         console.log(
-          `👇 获取总任务数${taskJson.queues.length}，已完成任务数${
-            queues.filter((q) => q.taskState === 1).length
+          `👇 获取总任务数${taskJson.queues.length}，已完成任务数${queues.filter((q) => q.taskState === 1).length
           }，截至当前可执行任务数${will_tasks.length}`
         );
         if (will_tasks.length) {
@@ -393,7 +389,7 @@ let scheduler = {
                   );
                   // eslint-disable-next-line no-unused-vars
                   await new Promise((resolve, reject) =>
-                    setTimeout(resolve, task.waitTime * 1000)
+                    setTimeout(resolve, task.waitTime * 1e3)
                   );
                 }
 
@@ -456,8 +452,7 @@ let scheduler = {
           await queue.onIdle();
         } else {
           console.log(
-            `👇 获取总任务数${taskJson.queues.length}，已完成任务数${
-              queues.filter((q) => q.taskState === 1).length
+            `👇 获取总任务数${taskJson.queues.length}，已完成任务数${queues.filter((q) => q.taskState === 1).length
             }，截至当前可执行任务数${will_tasks.length}`
           );
         }
