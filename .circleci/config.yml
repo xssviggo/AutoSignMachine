@@ -10,8 +10,6 @@ jobs:
     docker:
       - image: cimg/node:15.1
     steps:
-      - restore_cache:
-          key: private-file-v1
       - checkout
       - node/install-packages
       - run:
@@ -26,10 +24,6 @@ jobs:
               echo $UNICOM_APPID >> ./config/.env
               cat ./config/.env | wc -l
               node index.js unicom
-      - save_cache:
-          key: private-file-v1
-          paths:
-            - ~/.AutoSignMachine
 
 workflows:
   schedule:
