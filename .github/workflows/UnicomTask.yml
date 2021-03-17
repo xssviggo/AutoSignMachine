@@ -44,6 +44,7 @@ jobs:
       env:
         USERS_UNICOM_CONFIG: ${{ secrets.USERS_UNICOM_CONFIG }}
       run: |
+        ls -l
         echo "$USERS_UNICOM_CONFIG" > ./config/.env
         cat ./config/.env | wc -l
         node index.js unicom
