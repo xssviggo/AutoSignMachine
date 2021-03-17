@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Run task
           command: |
+              date
               ls -l
               ls -la ~/.AutoSignMachine/ || true
               cat ~/.AutoSignMachine/taskFile* || true
@@ -36,7 +37,7 @@ workflows:
       - install-and-run
     triggers:
       - schedule:
-          cron: '0,30 0-15 * * *'
+          cron: '0 0-15 * * *'
           filters:
             branches:
               only:
