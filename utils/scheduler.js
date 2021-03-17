@@ -163,6 +163,7 @@ let scheduler = {
     let taskJson = {};
     if (fs.existsSync(scheduler.taskFile)) {
       taskJson = fs.readFileSync(scheduler.taskFile).toString("utf-8");
+      console.log("taskJson", taskJson);
       console.log("📑 任务配置文件读取完毕 等待5秒再继续");
       // eslint-disable-next-line no-unused-vars
       await new Promise((resolve, reject) => setTimeout(resolve, 5 * 1000));
