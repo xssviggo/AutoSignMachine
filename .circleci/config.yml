@@ -14,8 +14,6 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - restore_cache:
-          key: private-file-
       - run:
           name: Run task
           command: |
@@ -28,10 +26,6 @@ jobs:
               echo $UNICOM_APPID >> ./config/.env
               cat ./config/.env | wc -l
               node index.js unicom
-      - save_cache:
-          key: private-file-{{ checksum "~/.AutoSignMachine" }}
-          paths:
-            - ~/.AutoSignMachine
 
 workflows:
   schedule:
