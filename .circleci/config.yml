@@ -42,7 +42,7 @@ workflows:
       - install-and-run
     triggers:
       - schedule:
-          cron: '0,30 0-15 * * *'
+          cron: '0 0-15 * * *'
           filters:
             branches:
               only:
