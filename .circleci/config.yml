@@ -9,8 +9,6 @@ jobs:
   install-and-run:
     docker:
       - image: cimg/node:15.1
-        environment:
-          TZ: "Asia/Shanghai"
     steps:
       - checkout
       - node/install-packages
