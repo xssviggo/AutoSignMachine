@@ -9,13 +9,11 @@ jobs:
   install-and-run:
     docker:
       - image: cimg/node:15.1
+        environment:
+          TZ: "Asia/Shanghai"
     steps:
       - checkout
       - node/install-packages
-      - run:
-          name: Set timezone
-          command: |
-              sudo timedatectl set-timezone 'Asia/Shanghai'
       - run:
           name: Run task
           command: |
