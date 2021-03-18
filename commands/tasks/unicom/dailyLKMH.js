@@ -43,6 +43,11 @@ var dailyLKMH = {
     let ecs_token = cookiesJson.cookies.find((i) => i.key == "ecs_token");
     ecs_token = ecs_token.value;
     if (!ecs_token) {
+      console.log(
+        "🚀 ~ file: dailyCheapStorePage.js ~ line 106 ~ doTask: ~ ecs_token",
+        ecs_token,
+        cookiesJson
+      );
       throw new Error("ecs_token缺失");
     }
     let jfid = cookiesJson.cookies.find((i) => i.key == "_jf_id");

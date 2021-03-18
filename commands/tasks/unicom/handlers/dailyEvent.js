@@ -38,6 +38,11 @@ let getOpenPlatLine = (url, cnf = { base: "" }, cb = function () {}) => {
     let cookiesJson = jar1.toJSON();
     let ecs_token = cookiesJson.cookies.find((i) => i.key == "ecs_token");
     if (!ecs_token) {
+      console.log(
+        "🚀 ~ file: dailyCheapStorePage.js ~ line 106 ~ doTask: ~ ecs_token",
+        ecs_token,
+        cookiesJson
+      );
       throw new Error("ecs_token缺失");
     }
     ecs_token = ecs_token.value;

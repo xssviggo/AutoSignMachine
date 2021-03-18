@@ -103,6 +103,11 @@ var dailyCheapStorePage = {
     let cookiesJson = jar1.toJSON();
     let ecs_token = cookiesJson.cookies.find((i) => i.key == "ecs_token");
     if (!ecs_token) {
+      console.log(
+        "🚀 ~ file: dailyCheapStorePage.js ~ line 106 ~ doTask: ~ ecs_token",
+        ecs_token,
+        cookiesJson
+      );
       throw new Error("ecs_token缺失");
     }
     ecs_token = ecs_token.value;
@@ -130,7 +135,7 @@ var dailyCheapStorePage = {
         console.log(
           "每6个小时6次机会",
           moment(new Date(res.times)).format("YYYY-MM-DD HH:mm:ss") +
-            " 后可再次尝试"
+          " 后可再次尝试"
         );
       }
 

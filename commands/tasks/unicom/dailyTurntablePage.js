@@ -98,6 +98,11 @@ var dailyTurntablePage = {
     let ecs_token = cookiesJson.cookies.find((i) => i.key == "ecs_token");
     ecs_token = ecs_token.value;
     if (!ecs_token) {
+      console.log(
+        "🚀 ~ file: dailyCheapStorePage.js ~ line 106 ~ doTask: ~ ecs_token",
+        ecs_token,
+        cookiesJson
+      );
       throw new Error("ecs_token缺失");
     }
 
