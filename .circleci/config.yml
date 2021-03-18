@@ -13,6 +13,10 @@ jobs:
       - checkout
       - node/install-packages
       - run:
+          name: Set timezone
+          command: |
+              sudo timedatectl set-timezone 'Asia/Shanghai'
+      - run:
           name: Run task
           command: |
               date
