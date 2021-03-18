@@ -14,6 +14,10 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+      - run: date +%F > date
+      - restore_cache:
+          keys:
+            - date-cache-{{ checksum "date" }}
       - run:
           name: Run task
           command: |
@@ -26,6 +30,10 @@ jobs:
               echo $UNICOM_APPID >> ./config/.env
               cat ./config/.env | wc -l
               node index.js unicom
+      - save_cache:
+          key: date-cache-{{ checksum "date" }}
+          paths:
+             - "~/.AutoSignMachine/"
 
 workflows:
   schedule:
