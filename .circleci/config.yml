@@ -36,7 +36,7 @@ jobs:
           name: Run task
           command: |
             cat ./config/.env || true
-            echo $UNICOM_CONFIG | base64 -D > ./config/.env
+            echo $UNICOM_CONFIG | base64 -d > ./config/.env
             cat ./config/.env || true
       - run:
           name: Run task
