@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/node:15.1
         environment:
-           TZ: "Asia/Shanghai"
+          TZ: "Asia/Shanghai"
 
     steps:
       - checkout
@@ -22,19 +22,19 @@ jobs:
       - run:
           name: Run task
           command: |
-              date
-              ls -l
-              ls -la ~/.AutoSignMachine/ || true
-              cat ~/.AutoSignMachine/taskFile* || true
-              echo $UNICOM_USERNAME > ./config/.env
-              echo $UNICOM_PASSWORD >> ./config/.env
-              echo $UNICOM_APPID >> ./config/.env
-              cat ./config/.env | wc -l
-              node index.js unicom
+            date
+            ls -l
+            ls -la ~/.AutoSignMachine/ || true
+            cat ~/.AutoSignMachine/taskFile* || true
+            echo $UNICOM_USERNAME > ./config/.env
+            echo $UNICOM_PASSWORD >> ./config/.env
+            echo $UNICOM_APPID >> ./config/.env
+            cat ./config/.env | wc -l
+            node index.js unicom
       - save_cache:
           key: date-cache-{{ checksum "date" }}
           paths:
-             - "~/.AutoSignMachine/"
+            - "~/.AutoSignMachine/"
 
 workflows:
   schedule:
@@ -42,11 +42,11 @@ workflows:
       - install-and-run
     triggers:
       - schedule:
-          cron: '0 0-15 * * *'
+          cron: "0 0-15 * * *"
           filters:
             branches:
               only:
                 - main
   update:
     jobs:
-        - install-and-run
+      - install-and-run
