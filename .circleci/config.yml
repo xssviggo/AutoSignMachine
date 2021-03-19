@@ -24,7 +24,7 @@ jobs:
             cat time
       - restore_cache:
           keys:
-            - date-cache-{{ checksum "date" }}-
+            - date-cache-{{ checksum "date" }}
       - run:
           name: Check environment
           command: |
