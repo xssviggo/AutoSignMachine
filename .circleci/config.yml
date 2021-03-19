@@ -15,24 +15,38 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: date +%F > date
+      - run:
+          name: Set cache key
+          command: |
+            date +%F > date
+            cat date
+            date +%T > time
+            cat time
       - restore_cache:
           keys:
-            - date-cache-{{ checksum "date" }}
+            - date-cache-{{ checksum "date" }}-
       - run:
-          name: Run task
+          name: Check environment
           command: |
             date
             ls -l
             ls -la ~/.AutoSignMachine/ || true
             cat ~/.AutoSignMachine/taskFile* || true
-            echo $UNICOM_USERNAME > ./config/.env
-            echo $UNICOM_PASSWORD >> ./config/.env
-            echo $UNICOM_APPID >> ./config/.env
-            cat ./config/.env | wc -l
+      - run:
+          name: Run task
+          command: |
+            cat ./config/.env || true
+            echo $UNICOM_CONFIG | base64 > ./config/.env
+            cat ./config/.env || true
+      - run:
+          name: Run task
+          command: |
+            cat ./config/.env || true
+            cat ~/.AutoSignMachine/taskFile* || true
             node index.js unicom
+            cat ~/.AutoSignMachine/taskFile* || true
       - save_cache:
-          key: date-cache-{{ checksum "date" }}
+          key: date-cache-{{ checksum "date" }}-{{ checksum "time" }}
           paths:
             - "~/.AutoSignMachine/"
 
