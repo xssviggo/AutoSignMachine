@@ -35,9 +35,9 @@ jobs:
       - run:
           name: Drop secret
           command: |
-            cat ./config/.env || true
+            [ -f "config/.env" ] && cat config/.env | grep -o '.\{4\}$' || true
             echo $UNICOM_CONFIG | base64 -d > ./config/.env
-            cat ./config/.env || true
+            [ -f "config/.env" ] && cat config/.env | grep -o '.\{4\}$' || true
       - run:
           name: Run task
           command: |
