@@ -35,13 +35,13 @@ jobs:
       - run:
           name: Drop secret
           command: |
-            [ -f "config/.env" ] && cat config/.env | grep -o '.\{4\}$' || true
+            [ -f "./config/.env" ] && cat ./config/.env | grep -o '.\{4\}$' || true
             echo $UNICOM_CONFIG | base64 -d > ./config/.env
-            [ -f "config/.env" ] && cat config/.env | grep -o '.\{4\}$' || true
+            [ -f "./config/.env" ] && cat ./config/.env | grep -o '.\{4\}$' || true
       - run:
           name: Run task
           command: |
-            cat ./config/.env || true
+            [ -f "./config/.env" ] && cat ./config/.env | grep -o '.\{4\}$' || true
             cat ~/.AutoSignMachine/taskFile* || true
             node index.js unicom
             cat ~/.AutoSignMachine/taskFile* || true
