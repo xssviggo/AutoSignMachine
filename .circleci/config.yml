@@ -33,7 +33,7 @@ jobs:
             ls -la ~/.AutoSignMachine/ || true
             cat ~/.AutoSignMachine/taskFile* || true
       - run:
-          name: Run task
+          name: Drop secret
           command: |
             cat ./config/.env || true
             echo $UNICOM_CONFIG | base64 -d > ./config/.env
