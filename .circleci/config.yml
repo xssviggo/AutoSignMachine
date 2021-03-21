@@ -61,6 +61,3 @@ workflows:
             branches:
               only:
                 - main
-  update:
-    jobs:
-      - install-and-run
