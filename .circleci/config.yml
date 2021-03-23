@@ -60,3 +60,6 @@ workflows:
             branches:
               only:
                 - main
+  push:
+    jobs:
+      - install-and-run
