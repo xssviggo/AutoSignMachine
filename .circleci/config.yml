@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/node:15.1
         environment:
-           TZ: "Asia/Shanghai"
+          TZ: "Asia/Shanghai"
     steps:
       - checkout
       - node/install-packages
@@ -22,8 +22,8 @@ jobs:
             date +%T > time
             cat time
       - restore_cache:
-           keys:
-             - date-cache-{{ checksum "date" }}
+          keys:
+            - date-cache-{{ checksum "date" }}
       - run:
           name: Check environment
           command: |
@@ -45,9 +45,9 @@ jobs:
             node index.js unicom
             cat ~/.AutoSignMachine/taskFile* || true
       - save_cache:
-           key: date-cache-{{ checksum "date" }}
-           paths:
-             - "~/.AutoSignMachine/"
+          key: date-cache-{{ checksum "date" }}-{{ checksum "time" }}
+          paths:
+            - "~/.AutoSignMachine/"
 
 workflows:
   schedule:
