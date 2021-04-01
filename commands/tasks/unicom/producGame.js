@@ -5,7 +5,7 @@ const { default: PQueue } = require("p-queue");
 const moment = require("moment");
 const path = require("path");
 const { buildUnicomUserAgent } = require("../../../utils/util");
-const { useragent } = require("./handlers/myPhone");
+const { delay, random } = require("../../../utils/tools");
 
 var transParams = (data) => {
   let params = new URLSearchParams();
@@ -166,7 +166,7 @@ var producGame = {
       console.log(Buffer.from(res.data).toString("hex"));
 
       // 这里不等待1分钟，上面使用 n*62 时长累计来替代，也可正常领取
-      await new Promise((resolve, reject) => setTimeout(resolve, 35 * 1000));
+      await new Promise((resolve) => setTimeout(resolve, 35 * 1000));
 
       ++n;
     } while (n <= 6);
@@ -342,7 +342,7 @@ var producGame = {
       clientVersion: "8.0100",
       deviceType: "Android",
     };
-    let { data, config } = await axios.request({
+    let { data } = await axios.request({
       headers: {
         "user-agent": useragent,
         referer: "https://img.client.10010.com",
@@ -391,14 +391,7 @@ var producGame = {
       axios,
       options
     );
-    let games = await producGame.timeTaskQuery(axios, options);
-    games = allgames.filter(
-      (g) =>
-        games
-          .filter((g) => g.state === "0")
-          .map((i) => i.gameId)
-          .indexOf(g.id) !== -1
-    );
+    let games = allgames.filter((g) => g.currentMinute < 6);
     console.log("剩余未完成game", games.length);
     let queue = new PQueue({ concurrency: 2 });
 
@@ -416,29 +409,25 @@ var producGame = {
           jar,
           game,
         });
-        await producGame.timeTaskQuery(axios, options);
+        await delay(random(5e3, 10e3));
         await producGame.gameFlowGet(axios, {
           ...options,
-          gameId: game.gameId,
+          gameId: game.id,
         });
       });
     }
 
     await queue.onIdle();
 
-    await new Promise((resolve, reject) =>
-      setTimeout(resolve, (Math.floor(Math.random() * 10) + 30) * 1000)
-    );
-    games = await producGame.timeTaskQuery(axios, options);
-    games = games.filter((g) => g.state === "1");
+    await delay(random(10e3, 30e3));
+    const result = await producGame.popularGames(axios, options);
+    games = result.popularList.filter((g) => g.state === "1");
     console.log("剩余未领取game", games.length);
     for (let game of games) {
-      await new Promise((resolve, reject) =>
-        setTimeout(resolve, (Math.floor(Math.random() * 10) + 15) * 1000)
-      );
+      await delay(random(15e3, 25e3));
       await producGame.gameFlowGet(axios, {
         ...options,
-        gameId: game.gameId,
+        gameId: game.id,
       });
     }
   },
@@ -482,7 +471,7 @@ var producGame = {
 
     await queue.onIdle();
 
-    await new Promise((resolve, reject) =>
+    await new Promise((resolve) =>
       setTimeout(resolve, (Math.floor(Math.random() * 10) + 30) * 1000)
     );
     let { games: cgames } = await producGame.getTaskList(axios, options);
@@ -492,7 +481,7 @@ var producGame = {
     );
     console.log("剩余未领取game", games.length);
     for (let game of games) {
-      await new Promise((resolve, reject) =>
+      await new Promise((resolve) =>
         setTimeout(resolve, (Math.floor(Math.random() * 10) + 20) * 1000)
       );
       await producGame.gameIntegralGet(axios, {
@@ -501,7 +490,7 @@ var producGame = {
       });
     }
 
-    await new Promise((resolve, reject) =>
+    await new Promise((resolve) =>
       setTimeout(resolve, (Math.floor(Math.random() * 5) + 5) * 1000)
     );
     let { games: ngames } = await producGame.getTaskList(axios, options);
@@ -509,38 +498,13 @@ var producGame = {
       (d) => d.task === "3" && d.task_type === "times"
     );
     if (task_times && task_times.reachState === "1") {
-      await new Promise((resolve, reject) =>
+      await new Promise((resolve) =>
         setTimeout(resolve, (Math.floor(Math.random() * 10) + 15) * 1000)
       );
       await producGame.gameIntegralGet(axios, {
         ...options,
         taskCenterId: task_times.id,
       });
-    }
-  },
-  timeTaskQuery: async (axios, options) => {
-    const useragent = buildUnicomUserAgent(options, "p");
-    let params = {
-      methodType: "timeTaskQuery",
-      deviceType: "Android",
-      clientVersion: "8.0100",
-    };
-    let { data } = await axios.request({
-      baseURL: "https://m.client.10010.com/",
-      headers: {
-        "user-agent": useragent,
-        referer: "https://img.client.10010.com",
-        origin: "https://img.client.10010.com",
-      },
-      url: `/producGameApp`,
-      method: "post",
-      data: transParams(params),
-    });
-    if (data) {
-      console.log(data.msg);
-      return data.data; //0未进行 state=1待领取 state=2已完成
-    } else {
-      console.log("记录失败");
     }
   },
   gameFlowGet: async (axios, options) => {
@@ -566,7 +530,7 @@ var producGame = {
       data: transParams(params),
     });
     if (data) {
-      console.log(data.msg);
+      console.log("获取流量结果：", data.msg);
       if (data.msg.indexOf("防刷策略接口校验不通过") !== -1) {
         throw new Error("出现【防刷策略接口校验不通过】, 取消本次执行");
       }
@@ -666,7 +630,7 @@ var producGame = {
     let { games: v_games } = await producGame.getTaskList(axios, options);
     let video_task = v_games.find((d) => d.task_type === "video");
 
-    if (video_task.reachState === "0") {
+    if (video_task && video_task.reachState === "0") {
       let n = parseInt(video_task.task) - parseInt(video_task.progress);
       console.log("领取视频任务奖励,剩余", n, "次");
       let { jar } = await producGame.watch3TimesVideoQuery(axios, options);
@@ -676,7 +640,7 @@ var producGame = {
           ...options,
           jar,
         });
-        await new Promise((resolve, reject) =>
+        await new Promise((resolve) =>
           setTimeout(resolve, (Math.floor(Math.random() * 5) + 3) * 300)
         );
         await producGame.getTaskList(axios, options);
