@@ -127,15 +127,15 @@ var start = async (params) => {
     taskOption
   );
 
-  // 首页-小说-阅读越有礼打卡赢话费
-  await scheduler.regTask(
-    "dailyBookRead",
-    async (request) => {
-      await require("./dailyBookRead").doTask(request, options);
-      await require("./dailyVideoBook").doTask(request, options);
-    },
-    taskOption
-  );
+  //FIXME 首页-小说-阅读越有礼打卡赢话费
+  // await scheduler.regTask(
+  //   "dailyBookRead",
+  //   async (request) => {
+  //     await require("./dailyBookRead").doTask(request, options);
+  //     await require("./dailyVideoBook").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
   // 首页-小说-读满10章赢好礼
   await scheduler.regTask(
@@ -173,38 +173,38 @@ var start = async (params) => {
   );
 
   // 首页-签到有礼-免费拿-看视频夺宝
-  // 易出现本次操作需要进行验证，暂时注释
-  await scheduler.regTask(
-    "dailyVideoFreeGoods",
-    async (request) => {
-      await require("./dailyVideoFreeGoods").doTask(request, options);
-    },
-    {
-      isCircle: true,
-      startTime: 10 * 3600,
-      intervalTime: 4 * 3600,
-    }
-  );
+  // FIXME:易出现本次操作需要进行验证，暂时注释
+  // await scheduler.regTask(
+  //   "dailyVideoFreeGoods",
+  //   async (request) => {
+  //     await require("./dailyVideoFreeGoods").doTask(request, options);
+  //   },
+  //   {
+  //     isCircle: true,
+  //     startTime: 10 * 3600,
+  //     intervalTime: 4 * 3600,
+  //   }
+  // );
 
-  // 首页-签到有礼-免费抽-抓OPPO手机
-  await scheduler.regTask(
-    "dailyGrabdollPage",
-    async (request) => {
-      await require("./dailyGrabdollPage").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 首页-签到有礼-免费抽-抓OPPO手机
+  // await scheduler.regTask(
+  //   "dailyGrabdollPage",
+  //   async (request) => {
+  //     await require("./dailyGrabdollPage").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
-  // 首页-签到有礼-免费抽-拿666积分-豪礼大派送抽奖
-  await scheduler.regTask(
-    "jflottery",
-    async (request) => {
-      await require("./jflottery").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 首页-签到有礼-免费抽-拿666积分-豪礼大派送抽奖
+  // await scheduler.regTask(
+  //   "jflottery",
+  //   async (request) => {
+  //     await require("./jflottery").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
-  ///666积分补全。。。。
+  // 666积分补全。。。。
   await scheduler.regTask(
     "jflotteryad",
     async (request) => {
@@ -213,14 +213,14 @@ var start = async (params) => {
     taskOption
   );
 
-  // 首页-签到有礼-免费抽-拿苹果iPad Pro(摇一摇)
-  await scheduler.regTask(
-    "dailyYYY",
-    async (request) => {
-      await require("./dailyYYY").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 首页-签到有礼-免费抽-拿苹果iPad Pro(摇一摇)
+  // await scheduler.regTask(
+  //   "dailyYYY",
+  //   async (request) => {
+  //     await require("./dailyYYY").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
   // 首页-签到有礼-免费抽-华为mate40pro(刮刮乐)
   await scheduler.regTask(
@@ -230,15 +230,6 @@ var start = async (params) => {
     },
     taskOption
   );
-
-  // 首页-签到有礼-免费抽-赢三星Galaxy Z(试试手气) deprecated from official API.
-  // await scheduler.regTask('dailyCheapStorePage', async (request) => {
-  //   await require('./dailyCheapStorePage').doTask(request, options)
-  // }, {
-  //   isCircle: true,
-  //   intervalTime: 4 * 3600,
-  //   ...taskOption
-  // })
 
   // 首页-签到有礼-免费抽-拆华为Pad(去抽奖)
   await scheduler.regTask(
@@ -258,32 +249,25 @@ var start = async (params) => {
     taskOption
   );
 
-  // // 首页-签到有礼-免费抽-赢Apple Watch(去抽奖)
+  // FIXME: 首页-签到有礼-赢vivo X60(翻牛牌)
+  // 非法请求
   // await scheduler.regTask(
-  //   "dailyTurntablePage",
+  //   "bcow",
   //   async (request) => {
-  //     await require("./dailyTurntablePage").doTask(request, options);
+  //     await require("./dailyBcow").doTask(request, options);
   //   },
   //   taskOption
   // );
 
-  // 首页-签到有礼-赢vivo X60(翻牛牌)
-  await scheduler.regTask(
-    "bcow",
-    async (request) => {
-      await require("./dailyBcow").doTask(request, options);
-    },
-    taskOption
-  );
-
-  // 首页-签到有礼-赚更多福利-看视频奖励5积分
-  await scheduler.regTask(
-    "dailyVideo",
-    async (request) => {
-      await require("./dailyVideo").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 首页-签到有礼-赚更多福利-看视频奖励5积分
+  // 网络拥堵
+  // await scheduler.regTask(
+  //   "dailyVideo",
+  //   async (request) => {
+  //     await require("./dailyVideo").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
   // 首页-签到有礼-赚更多福利-天天抽好礼
   await scheduler.regTask(
@@ -292,18 +276,6 @@ var start = async (params) => {
       await require("./dailylottery").doTask(request, options);
     },
     taskOption
-  );
-
-  // 首页-签到有礼-居家娱乐馆
-  await scheduler.regTask(
-    "gameYearBox",
-    async (request) => {
-      await require("./gameYearBox").doTask(request, options);
-    },
-    {
-      ...taskOption,
-      startTime: 20 * 3600,
-    }
   );
 
   // 首页-游戏-娱乐中心-每日打卡
@@ -358,66 +330,17 @@ var start = async (params) => {
     }
   );
 
-  // await require('./integral').getflDetail(request, options)
-  // await require('./integral').getTxDetail(request, options)
-  // await require('./integral').getDxDetail(request, options)
-  // await require('./integral').getCoins(request, options)
-  /***
-  // 首页-牛气-秒杀抢兑
-  await scheduler.regTask(
-    "NiujieSpikePrize",
-    async (request) => {
-      await require("./Niujie").spikePrize(request, options);
-    },
-    {
-      ...taskOption,
-      startTime: 9.6 * 3600,
-      ignoreRelay: true,
-    }
-  );
+  // FIXME: 首页-积分商城-10分精彩看视频得积分-三只松鼠 [支付页]
+  // 网络拥堵
+  // await scheduler.regTask(
+  //   "threeSquirrels",
+  //   async (request) => {
+  //     await require("./dailyThreeSquirrels.js").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
-  // 首页-牛气-转盘抽奖
-  await scheduler.regTask(
-    "NiujieTask",
-    async (request) => {
-      await require("./Niujie").doTask(request, options);
-    },
-    taskOption
-  );
-
-  // 首页-牛气-场馆领牛气
-  await scheduler.regTask(
-    "NiujieReceiveCalf",
-    async (request) => {
-      await require("./Niujie").receiveCalf(request, options);
-    },
-    {
-      isCircle: true,
-      intervalTime: 1 * 3600,
-      startTime: 1,
-      ...taskOption,
-    }
-  );
-***/
-  //首页-签到有礼-聚宝盆 [广告图]
-  await scheduler.regTask(
-    "ingots",
-    async (request) => {
-      await require("./ingotsPage").doTask(request, options);
-    },
-    taskOption
-  );
-
-  //首页-积分商城-10分精彩看视频得积分-三只松鼠 [支付页]
-  await scheduler.regTask(
-    "threeSquirrels",
-    async (request) => {
-      await require("./dailyThreeSquirrels.js").doTask(request, options);
-    },
-    taskOption
-  );
-
-  //首页-下载app
+  // 首页-下载app
   await scheduler.regTask(
     "freeDownFloorAd",
     async (request) => {
@@ -425,7 +348,8 @@ var start = async (params) => {
     },
     taskOption
   );
-  //首页-签到有礼-免费抽霸王餐
+
+  // 首页-签到有礼-免费抽霸王餐
   await scheduler.regTask(
     "dailyBaWangcard",
     async (request) => {
@@ -434,7 +358,8 @@ var start = async (params) => {
     taskOption
   );
 
-  //首页-小说-任意一本小说内页章节中间 [看书里面的5个视频]
+  // 首页-小说-任意一本小说内页章节中间 [看书里面的5个视频]
+  // 网络拥堵
   await scheduler.regTask(
     "book5video",
     async (request) => {
@@ -444,6 +369,7 @@ var start = async (params) => {
   );
 
   // 首页-签到有礼-免费领-猜拳拿话费
+  // 非法请求
   await scheduler.regTask(
     "dailyFingerqd",
     async (request) => {
@@ -461,26 +387,28 @@ var start = async (params) => {
     taskOption
   );
 
-  //套餐看视频得积分
-  //活动入口：主页-套餐页面-2个视频
-  await scheduler.regTask(
-    "taocan",
-    async (request) => {
-      await require("./taocan.js").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 套餐看视频得积分
+  // 活动入口：主页-套餐页面-2个视频
+  // 前方网络拥堵
+  // await scheduler.regTask(
+  //   "taocan",
+  //   async (request) => {
+  //     await require("./taocan.js").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
-  // 首页-签到有礼-饿了么红包
-  await scheduler.regTask(
-    "dailyTurncards",
-    async (request) => {
-      await require("./dailyTurncards.js").doTask(request, options);
-    },
-    taskOption
-  );
+  // FIXME: 首页-签到有礼-饿了么红包
+  // 非法请求
+  // await scheduler.regTask(
+  //   "dailyTurncards",
+  //   async (request) => {
+  //     await require("./dailyTurncards.js").doTask(request, options);
+  //   },
+  //   taskOption
+  // );
 
-  //积分查询
+  // 积分查询
   await scheduler.regTask(
     "fetchCoins",
     async (request) => {
