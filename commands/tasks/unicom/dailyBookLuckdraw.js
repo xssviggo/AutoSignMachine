@@ -1,5 +1,4 @@
 var crypto = require("crypto");
-var CryptoJS = require("crypto-js");
 const { RSAUtils } = require("./RSAUtils");
 
 var transParams = (data) => {
@@ -47,7 +46,7 @@ var dailyBookLuckdraw = {
     var exponent = "010001";
     var key = RSAUtils.getKeyPair(exponent, "", modulus);
     let phonenum = RSAUtils.encryptedString(key, options.user);
-    let { data, config } = await axios.request({
+    let { config } = await axios.request({
       headers: {
         "user-agent": useragent,
         "X-Requested-With": "com.sinovatech.unicom.ui",
@@ -65,15 +64,18 @@ var dailyBookLuckdraw = {
     if (!useraccount || !diwert) {
       throw new Error("获取用户信息失败");
     }
-
-    await axios.request({
-      headers: {
-        "user-agent": useragent,
-      },
-      jar,
-      url: `http://m.iread.wo.cn/touchextenernal/seeadvertluckdraw/index.action?channelid=18000018&yw_code=&desmobile=${options.user}&version=android@8.0100`,
-      method: "GET",
-    });
+    try {
+      await axios.request({
+        headers: {
+          "user-agent": useragent,
+        },
+        jar,
+        url: `http://m.iread.wo.cn/touchextenernal/seeadvertluckdraw/index.action?channelid=18000018&yw_code=&desmobile=${options.user}&version=android@8.0100`,
+        method: "GET",
+      });
+    } catch {
+      //
+    }
 
     return {
       jar,
@@ -86,7 +88,6 @@ var dailyBookLuckdraw = {
       ...options,
       Authorization,
     });
-
     let times = 5;
     do {
       if (times < 5) {
@@ -140,10 +141,8 @@ var dailyBookLuckdraw = {
         .catch((err) => {
           if (err.response.status !== 200) {
             console.log("访问错误", err.response.statusText);
-            throw new Error(
-              "访问错误:" +
-                [err.response.status, err.response.statusText].join("-")
-            );
+            const { status, statusText } = err.response;
+            throw new Error(`访问错误: ${status}-${statusText}`);
           }
         });
       let result = res.data;
@@ -157,7 +156,7 @@ var dailyBookLuckdraw = {
       }
 
       console.log("等待15秒再继续");
-      await new Promise((resolve, reject) => setTimeout(resolve, 15 * 1000));
+      await new Promise((resolve) => setTimeout(resolve, 15 * 1000));
     } while (--times);
   },
 };
