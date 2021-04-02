@@ -302,7 +302,7 @@ let freeDownFloorAd = {
   },
   // eslint-disable-next-line no-unused-vars
   getIntegralFree: async (axios, options, jar) => {
-    let res = await axios
+    await axios
       .request({
         headers: {
           "user-agent": useragent(options),
@@ -316,16 +316,13 @@ let freeDownFloorAd = {
         "X-Requested-With": "com.sinovatech.unicom.ui",
       })
       .catch((err) => console.log(err));
-    console.log(res.data);
   },
   getCoins: async (axios, options, { citycode }) => {
     let URL =
       `https://img.client.10010.com/SigininApp/index.html?` +
       `yw_code=&desmobile=${options.user}&version=android@8.0102#/&` +
-      `operation=click&localUrl=https://img.client.10010.com/SigininApp/index.html?yw_code=&desmobile=${
-        options.user
-      }&version=android@8.0102&nodename=DIV&path=wrap0item0item-wrap0items-wrap0content2container6home0app&stc=&citycode=${citycode}&jfuser=${
-        options.user
+      `operation=click&localUrl=https://img.client.10010.com/SigininApp/index.html?yw_code=&desmobile=${options.user
+      }&version=android@8.0102&nodename=DIV&path=wrap0item0item-wrap0items-wrap0content2container6home0app&stc=&citycode=${citycode}&jfuser=${options.user
       }||&t=${new Date().getTime()}&uuid=${uuidv4()}`;
     URL =
       "https://m.jf.10010.com/jf-log/4.gif?domain=img.client.10010.com&href=" +
