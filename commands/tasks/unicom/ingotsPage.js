@@ -16,21 +16,26 @@ let ingotsPage = {
   // eslint-disable-next-line no-unused-vars
   postIndexInfo: async (axios, options, { ecs_token, searchParams, jar1 }) => {
     let phone = encryptPhone(options.user, "gb6YCccUvth75Tm2");
-    let result = await axios.request({
-      headers: {
-        "user-agent": useragent(options),
-        referer: `https://wxapp.msmds.cn/`,
-        origin: "https://wxapp.msmds.cn",
-      },
-      url: `https://wxapp.msmds.cn/jplus/h5/greetGoldIngot/IndexInfo`,
-      method: "POST",
-      data: transParams({
-        channelId: "LT_channel",
-        phone: phone,
-        token: ecs_token,
-        sourceCode: "lt_ingots",
-      }),
-    });
+    let result;
+    try {
+      result = await axios.request({
+        headers: {
+          "user-agent": useragent(options),
+          referer: `https://wxapp.msmds.cn/`,
+          origin: "https://wxapp.msmds.cn",
+        },
+        url: `https://wxapp.msmds.cn/jplus/h5/greetGoldIngot/IndexInfo`,
+        method: "POST",
+        data: transParams({
+          channelId: "LT_channel",
+          phone: phone,
+          token: ecs_token,
+          sourceCode: "lt_ingots",
+        }),
+      });
+    } catch (e) {
+      console.log("ingots page: ", e);
+    }
     if (result.data.code !== 200) {
       throw new Error("❌ something errors: ", result.data.msg);
     }
