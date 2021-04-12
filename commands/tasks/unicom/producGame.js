@@ -249,8 +249,8 @@ var producGame = {
     const useragent = buildUnicomUserAgent(options, "p");
     let params = {
       methodType: "popularGames",
-      deviceType: "Android",
-      clientVersion: "8.0100",
+      deviceType: options.deviceType || "Android",
+      clientVersion: "10.0100",
     };
     let { data, config } = await axios.request({
       baseURL: "https://m.client.10010.com/",
@@ -311,7 +311,7 @@ var producGame = {
     const useragent = buildUnicomUserAgent(options, "p");
     let params = {
       methodType: "record",
-      deviceType: "Android",
+      deviceType: options.deviceType || "Android",
       clientVersion: "8.0100",
       gameId: gameId,
       taskId: "",
@@ -340,7 +340,7 @@ var producGame = {
       videoIntegral: "0",
       isVideo: "Y",
       clientVersion: "8.0100",
-      deviceType: "Android",
+      deviceType: options.deviceType || "Android",
     };
     let { data } = await axios.request({
       headers: {
@@ -362,7 +362,7 @@ var producGame = {
     const useragent = buildUnicomUserAgent(options, "p");
     let params = {
       methodType: "queryTaskCenter",
-      deviceType: "Android",
+      deviceType: options.deviceType || "Android",
       clientVersion: "8.0100",
     };
     let { data, config } = await axios.request({
@@ -514,7 +514,7 @@ var producGame = {
       userNumber: options.user,
       methodType: "flowGet",
       gameId: gameId,
-      deviceType: "Android",
+      deviceType: options.deviceType || "Android",
       clientVersion: "8.0100",
     };
     let { data } = await axios.request({
@@ -544,7 +544,7 @@ var producGame = {
     let params = {
       methodType: "taskGetReward",
       taskCenterId: taskCenterId,
-      deviceType: "Android",
+      deviceType: options.deviceType || "Android",
       clientVersion: "8.0100",
     };
     let { data } = await axios.request({

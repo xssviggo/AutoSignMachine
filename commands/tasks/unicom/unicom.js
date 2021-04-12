@@ -292,7 +292,18 @@ var start = async (params) => {
   await scheduler.regTask(
     "dailygameflow",
     async (request) => {
-      await require("./producGame").doGameFlowTask(request, options);
+      await require("./producGame").doGameFlowTask(request, { ...options, deviceType: "Android" });
+      await require("./producGame").doGameFlowTask(request, { ...options, deviceType: "iOS" });
+    },
+    taskOption
+  );
+
+  // 首页-积分查询-游戏任务
+  await scheduler.regTask(
+    "dailygameIntegral",
+    async (request) => {
+      await require("./producGame").doGameIntegralTask(request, { ...options, deviceType: "Android" });
+      await require("./producGame").doGameIntegralTask(request, { ...options, deviceType: "iOS" });
     },
     taskOption
   );
@@ -307,15 +318,6 @@ var start = async (params) => {
       ...taskOption,
       startTime: 20 * 3600,
     }
-  );
-
-  // 首页-积分查询-游戏任务
-  await scheduler.regTask(
-    "dailygameIntegral",
-    async (request) => {
-      await require("./producGame").doGameIntegralTask(request, options);
-    },
-    taskOption
   );
 
   // 首页-知识-限时免费（连续7天阶梯激励）
