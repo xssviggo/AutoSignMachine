@@ -19,9 +19,10 @@ jobs:
       - name: Get npm cache
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: ${{ hashFiles('packages.json') }}
-          restore-keys: ${{ hashFiles('packages.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
       - name: Set cache key
@@ -34,8 +35,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "~/.AutoSignMachine/"
-          key: date-cache-{{ hashFiles("cur-date") }}-{{ hashFiles("cur-time") }}
-          restore-keys: date-cache-{{ hashFiles("cur-date") }}
+          key: date-cache-{{ hashFiles("**/cur-date") }}-{{ hashFiles("**/cur-time") }}
+          restore-keys: date-cache-{{ hashFiles("**/cur-date") }}
       - name: Check environment
         run: |
           date
