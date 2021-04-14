@@ -39,8 +39,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: "~/.AutoSignMachine/"
-          key: date-cache-{{ hashFiles("**/cur-date") }}-{{ hashFiles("**/cur-time") }}
-          restore-keys: date-cache-{{ hashFiles("**/cur-date") }}
+          key: date-cache-${{ hashFiles("**/cur-date") }}-${{ hashFiles("**/cur-time") }}
+          restore-keys: date-cache-${{ hashFiles("**/cur-date") }}
       - name: Check environment
         run: |
           date
