@@ -1,8 +1,44 @@
-> Due to a third-party risk dispute, this script stopped sharing
-> 
-> 由于第三方风险争议，此脚本停止分享
+# 本 Fork 项目介绍
 
-> 由于其他原因，该项目暂时停止维护
+自动签到复活版
+
+当前只在维护 Unicom 的部分，移除了部分过期活动
+
+## 当前状态
+
+每天能获得 30+ 积分以及 2.5GB+ 日流量，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
+
+## 使用方法
+
+1. 获得设备的 appid，参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#2%E5%87%86%E5%A4%87%E9%9C%80%E8%A6%81%E7%9A%84%E5%8F%82%E6%95%B0)自行获取
+2. fork 本项目
+3. 完善配置文件
+  ```
+UNICOM_USERNAME = '18812345678' # 将 18812345678 替换为你的自己的登录号码
+UNICOM_PASSWORD = '654321' # 将 654321 替换为你自己的登录密码
+UNICOM_APPID = 'xxxxxx' # 将 xxxxxx 替换为上面获取的 appid
+  ```
+4. 把上面的配置修改好后复制到[这里](https://www.baidufe.com/fehelper/en-decode/index.html)，然后选择【加密】中的 【Base64编码】，你会在下面的输入框中获得编码后的配置文件
+5. 参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets)，增加一个 Secrets 名为 UNICOM_CONFIG，值为第 4 步获得的编码后配置文件
+6. 最后还是参考该项目 [UnicomTask](https://github.com/srcrs/UnicomTask#4%E5%BC%80%E5%90%AFactions) 运行 Github Action
+
+**本 Fork 仅支持 Pull Requests 不支持任何的 Issue 以及讨论**
+
+**本项目随时可能停止维护，但不会影响到你自己已部署项目的使用**
+
+**本项目禁止传播，请在24小时内删除**
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+# 以下是原项目介绍
 # AutoSignMachine
 
 **一个自动执行任务的工具，通过它可以实现账号自动签到，自动领取权益等功能，帮助我们轻松升级。**
@@ -172,7 +208,4 @@ docker run \
 ## 指定任务模式，可以指定仅需要运行的子任务，多用户使用规则参看`多用户配置`
 #增加 --tasks taskName1,taskName2,taskName3
 ```
-
-### GitHub Actions 运行问题
-暂未处理GitHub Actions支持
 
