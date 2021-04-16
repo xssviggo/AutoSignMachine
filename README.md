@@ -21,10 +21,13 @@
 2. fork 本项目
 3. 完善配置文件
   ```
-UNICOM_USERNAME = '18812345678' # 将 18812345678 替换为你的自己的登录号码
-UNICOM_PASSWORD = '654321' # 将 654321 替换为你自己的登录密码
-UNICOM_APPID = 'xxxxxx' # 将 xxxxxx 替换为上面获取的 appid
+UNICOM_USERNAME = '18812345678'
+UNICOM_PASSWORD = '654321'
+UNICOM_APPID = 'xxxxxx'
   ```
+   - 将 18812345678 替换为你的自己的登录号码
+   - 将 654321 替换为你自己的登录密码
+   - 将 xxxxxx 替换为上面获取的 appid
 4. 把上面的配置修改好后复制到[这里](https://www.baidufe.com/fehelper/en-decode/index.html)，然后选择【加密】中的 【Base64编码】，你会在下面的输入框中获得编码后的配置文件
 5. 参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets)，增加一个 Secrets 名为 UNICOM_CONFIG，值为第 4 步获得的编码后配置文件
 6. 最后还是参考该项目 [UnicomTask](https://github.com/srcrs/UnicomTask#4%E5%BC%80%E5%90%AFactions) 运行 Github Action
