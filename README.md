@@ -8,6 +8,13 @@
 
 每天能获得 30+ 积分以及 2.5GB+ 日流量，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
 
+## 必读必读
+
+**本 Fork 仅支持 Pull Requests 不支持任何的 Issue 以及讨论**
+
+**本项目随时可能停止维护，但不会影响到你自己已部署项目的使用**
+
+**本项目禁止传播，请在24小时内删除**
 ## 使用方法
 
 1. 获得设备的 appid，参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#2%E5%87%86%E5%A4%87%E9%9C%80%E8%A6%81%E7%9A%84%E5%8F%82%E6%95%B0)自行获取
@@ -22,11 +29,17 @@ UNICOM_APPID = 'xxxxxx' # 将 xxxxxx 替换为上面获取的 appid
 5. 参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets)，增加一个 Secrets 名为 UNICOM_CONFIG，值为第 4 步获得的编码后配置文件
 6. 最后还是参考该项目 [UnicomTask](https://github.com/srcrs/UnicomTask#4%E5%BC%80%E5%90%AFactions) 运行 Github Action
 
-**本 Fork 仅支持 Pull Requests 不支持任何的 Issue 以及讨论**
+## 一些说明
 
-**本项目随时可能停止维护，但不会影响到你自己已部署项目的使用**
+该项目是支持了自动调度的，也就是它会随机地在一天中完成所有任务，而不是集中到某一小段时间完成。这样可以模拟人在操作，防止屏蔽。
 
-**本项目禁止传播，请在24小时内删除**
+也就是说，你需要让本项目运行至少一天才能看出来效果（或者你可以去 Github Action 日志查看运行结果）
+
+## Todo
+
+下面的是现在有问题的部分功能，大佬们如果感兴趣可以修一修 🙃
+
+- [ ] 【首页】-【游戏】-【每日打卡】-【每日任务】，脚本可以自动玩游戏，但自动领取被风控了，需要手动点击领取
 
 #
 #
