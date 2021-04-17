@@ -410,26 +410,26 @@ var producGame = {
           game,
         });
         await delay(random(5e3, 10e3));
-        await producGame.gameFlowGet(axios, {
-          ...options,
-          gameId: game.id,
-        });
+        // await producGame.gameFlowGet(axios, {
+        //   ...options,
+        //   gameId: game.id,
+        // });
       });
     }
 
     await queue.onIdle();
 
     await delay(random(10e3, 30e3));
-    const result = await producGame.popularGames(axios, options);
-    games = result.popularList.filter((g) => g.state === "1");
-    console.log("剩余未领取game", games.length);
-    for (let game of games) {
-      await delay(random(15e3, 25e3));
-      await producGame.gameFlowGet(axios, {
-        ...options,
-        gameId: game.id,
-      });
-    }
+    // const result = await producGame.popularGames(axios, options);
+    // games = result.popularList.filter((g) => g.state === "1");
+    // console.log("剩余未领取game", games.length);
+    // for (let game of games) {
+    //   await delay(random(15e3, 25e3));
+    //   await producGame.gameFlowGet(axios, {
+    //     ...options,
+    //     gameId: game.id,
+    //   });
+    // }
   },
   doGameIntegralTask: async (axios, options) => {
     let { games, jar } = await producGame.getTaskList(axios, options);
