@@ -1,12 +1,12 @@
 # 介绍
 
-自动签到复活版
+自动签到 Github Action 版
 
 当前只在维护 Unicom 的部分，移除了部分过期活动
 
 ## 当前状态
 
-每天能获得 30+ 积分以及 2.5GB+ 日流量，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
+每天能获得 20+ 积分以及 2GB+ 日流量，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
 
 ## 必读必读
 
@@ -31,6 +31,20 @@ UNICOM_APPID = 'xxxxxx'
 4. 把上面的配置修改好后复制到[这里](https://www.baidufe.com/fehelper/en-decode/index.html)，然后选择【加密】中的 【Base64编码】，你会在下面的输入框中获得编码后的配置文件
 5. 参考该项目[UnicomTask](https://github.com/srcrs/UnicomTask#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets)，增加一个 Secrets 名为 UNICOM_CONFIG，值为第 4 步获得的编码后配置文件
 6. 最后还是参考该项目 [UnicomTask](https://github.com/srcrs/UnicomTask#4%E5%BC%80%E5%90%AFactions) 运行 Github Action
+
+## 自动更新
+
+前提：我假设大家的项目都是 fork 的本项目
+
+我会时不时抽空维护该项目，所以偶尔会向本项目提交代码。
+
+fork 的项目是不会自动拉取原项目最新提交的内容的。
+
+所以我们需要配置好自动更新，保证能用上最新的代码。
+
+**尽可能不要去修改你 fork 的代码，不然在自动拉取代码的时候会产生冲突，导致拉取失败。**添加 Github Action Secrets 不受影响
+
+安装 [Pull](https://github.com/apps/pull) 应用并配置好同步本项目即可。
 
 ## 一些说明
 
