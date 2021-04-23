@@ -55,6 +55,8 @@ jobs:
           echo $UNICOM_CONFIG | base64 -d > ./config/.env
           [ -f "./config/.env" ] && cat ./config/.env | grep -o '.\{4\}$' || true
       - name: Run task
+        env:
+          DEBUG_MODE: ${{ secrets.DEBUG_MODE }}
         run: |
           [ -f "./config/.env" ] && cat ./config/.env | grep -o '.\{4\}$' || true
           cat ~/.AutoSignMachine/taskFile* || true
