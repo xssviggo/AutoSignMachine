@@ -409,27 +409,27 @@ var producGame = {
           jar,
           game,
         });
-        await delay(random(5e3, 10e3));
-        // await producGame.gameFlowGet(axios, {
-        //   ...options,
-        //   gameId: game.id,
-        // });
+        await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
+        await producGame.gameFlowGet(axios, {
+          ...options,
+          gameId: game.id,
+        });
       });
     }
 
     await queue.onIdle();
 
     await delay(random(10e3, 30e3));
-    // const result = await producGame.popularGames(axios, options);
-    // games = result.popularList.filter((g) => g.state === "1");
-    // console.log("剩余未领取game", games.length);
-    // for (let game of games) {
-    //   await delay(random(15e3, 25e3));
-    //   await producGame.gameFlowGet(axios, {
-    //     ...options,
-    //     gameId: game.id,
-    //   });
-    // }
+    const result = await producGame.popularGames(axios, options);
+    games = result.popularList.filter((g) => g.state === "1");
+    console.log("剩余未领取game", games.length);
+    for (let game of games) {
+      await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
+      await producGame.gameFlowGet(axios, {
+        ...options,
+        gameId: game.id,
+      });
+    }
   },
   doGameIntegralTask: async (axios, options) => {
     let { games, jar } = await producGame.getTaskList(axios, options);
@@ -462,6 +462,7 @@ var producGame = {
           },
         });
         await producGame.getTaskList(axios, options);
+        await delay(random(3 * 60 * 1e3, 5 * 60 * 1e3)); // delay 3 ~ 5 min to simulation human
         await producGame.gameIntegralGet(axios, {
           ...options,
           taskCenterId: game.id,
@@ -481,9 +482,7 @@ var producGame = {
     );
     console.log("剩余未领取game", games.length);
     for (let game of games) {
-      await new Promise((resolve) =>
-        setTimeout(resolve, (Math.floor(Math.random() * 10) + 20) * 1000)
-      );
+      await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
       await producGame.gameIntegralGet(axios, {
         ...options,
         taskCenterId: game.id,
