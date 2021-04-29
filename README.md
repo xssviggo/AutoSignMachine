@@ -6,7 +6,11 @@
 
 ## 当前状态
 
-每天能获得 20+ 积分以及 2GB+ 日流量，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
+~~每天能获得 20+ 积分以及 2GB+ 日流量~~，建议配合 [UnicomTask](https://github.com/srcrs/UnicomTask) 食用。
+
+由于联通的活动在不断更新，现在是每天 “猜1G” 流量，我已经尝试打开自动获取流量。
+
+所以预估每天可以获得 30+ 的积分和 1G ～ 3G 流量。
 
 ## 必读必读
 
@@ -42,7 +46,7 @@ fork 的项目是不会自动拉取原项目最新提交的内容的。
 
 所以我们需要配置好自动更新，保证能用上最新的代码。
 
-**尽可能不要去修改你 fork 的代码，不然在自动拉取代码的时候会产生冲突，导致拉取失败。**添加 Github Action Secrets 不受影响
+**尽可能不要去修改你 fork 的代码，不然在自动拉取代码的时候会产生冲突，导致拉取失败。** 添加 Github Action Secrets 不受影响
 
 安装 [Pull](https://github.com/apps/pull) 应用并配置好同步本项目即可。
 
