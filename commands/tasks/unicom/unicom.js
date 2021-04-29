@@ -292,17 +292,39 @@ var start = async (params) => {
   await scheduler.regTask(
     "dailygameflow",
     async (request) => {
+      // eslint-disable-next-line
       await require("./producGame").doGameFlowTask(request, { ...options, deviceType: "Android" });
+      // eslint-disable-next-line
       await require("./producGame").doGameFlowTask(request, { ...options, deviceType: "iOS" });
     },
-    taskOption
+    {
+      ...taskOption,
+      endHours: 12, // must execute before 12:00
+    }
+  );
+
+  // 首页-游戏-娱乐中心-天天领取3G流量包-获取流量包
+  await scheduler.regTask(
+    "dailygameflowget",
+    async (request) => {
+      // eslint-disable-next-line
+      await require("./producGame").doGameFlowGet(request, { ...options, deviceType: "Android" });
+      // eslint-disable-next-line
+      await require("./producGame").doGameFlowGet(request, { ...options, deviceType: "iOS" });
+    },
+    {
+      ...taskOption,
+      startHours: 16, // must execute after 16:00
+    }
   );
 
   // 首页-积分查询-游戏任务
   await scheduler.regTask(
     "dailygameIntegral",
     async (request) => {
+      // eslint-disable-next-line
       await require("./producGame").doGameIntegralTask(request, { ...options, deviceType: "Android" });
+      // eslint-disable-next-line
       await require("./producGame").doGameIntegralTask(request, { ...options, deviceType: "iOS" });
     },
     taskOption
@@ -392,23 +414,23 @@ var start = async (params) => {
   // FIXME: 套餐看视频得积分
   // 活动入口：主页-套餐页面-2个视频
   // 前方网络拥堵
-  // await scheduler.regTask(
-  //   "taocan",
-  //   async (request) => {
-  //     await require("./taocan.js").doTask(request, options);
-  //   },
-  //   taskOption
-  // );
+  await scheduler.regTask(
+    "taocan",
+    async (request) => {
+      await require("./taocan.js").doTask(request, options);
+    },
+    taskOption
+  );
 
   // FIXME: 首页-签到有礼-饿了么红包
   // 非法请求
-  // await scheduler.regTask(
-  //   "dailyTurncards",
-  //   async (request) => {
-  //     await require("./dailyTurncards.js").doTask(request, options);
-  //   },
-  //   taskOption
-  // );
+  await scheduler.regTask(
+    "dailyTurncards",
+    async (request) => {
+      await require("./dailyTurncards.js").doTask(request, options);
+    },
+    taskOption
+  );
 
   // 积分查询
   await scheduler.regTask(

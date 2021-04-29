@@ -409,27 +409,23 @@ var producGame = {
           jar,
           game,
         });
-        // await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
-        // await producGame.gameFlowGet(axios, {
-        //   ...options,
-        //   gameId: game.id,
-        // });
+        await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
       });
     }
 
     await queue.onIdle();
-
-    await delay(random(10e3, 30e3));
-    // const result = await producGame.popularGames(axios, options);
-    // games = result.popularList.filter((g) => g.state === "1");
-    // console.log("剩余未领取game", games.length);
-    // for (let game of games) {
-    //   await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
-    //   await producGame.gameFlowGet(axios, {
-    //     ...options,
-    //     gameId: game.id,
-    //   });
-    // }
+  },
+  doGameFlowGet: async (axios, options) => {
+    const result = await producGame.popularGames(axios, options);
+    const games = result.popularList.filter((g) => g.state === "1");
+    console.log("剩余未领取game", games.length);
+    for (let game of games) {
+      await delay(random(7 * 60 * 1e3, 7 * 60 * 1e3)); // delay 7 ~ 10 min to simulation human
+      await producGame.gameFlowGet(axios, {
+        ...options,
+        gameId: game.id,
+      });
+    }
   },
   doGameIntegralTask: async (axios, options) => {
     let { games, jar } = await producGame.getTaskList(axios, options);
