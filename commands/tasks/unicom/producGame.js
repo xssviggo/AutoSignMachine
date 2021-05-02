@@ -646,7 +646,8 @@ var producGame = {
         ++i;
       }
     }
-
+  },
+  doTodayDailyTaskGet: async (axios, options) => {
     let { games } = await producGame.getTaskList(axios, options);
     let today_task = games.find((d) => d.task_type === "todayTask");
     if (today_task.reachState === "0") {

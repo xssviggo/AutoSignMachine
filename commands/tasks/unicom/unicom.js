@@ -330,7 +330,7 @@ var start = async (params) => {
     taskOption
   );
 
-  // 首页-游戏-娱乐中心-每日打卡-完成今日任务(200m)
+  // 首页-游戏-娱乐中心-每日打卡-完成今日任务
   await scheduler.regTask(
     "todayDailyTask",
     async (request) => {
@@ -339,6 +339,19 @@ var start = async (params) => {
     {
       ...taskOption,
       startTime: 20 * 3600,
+      endHours: 12,
+    }
+  );
+
+  // 首页-游戏-娱乐中心-每日打卡-完成今日任务(200m)
+  await scheduler.regTask(
+    "todayDailyTaskGet",
+    async (request) => {
+      await require("./producGame").doTodayDailyTaskGet(request, options);
+    },
+    {
+      ...taskOption,
+      startHours: 16,
     }
   );
 
