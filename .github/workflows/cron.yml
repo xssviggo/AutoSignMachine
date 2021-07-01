@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "30,01 * * * *"
+    - cron: "31,01 * * * *"
 
 concurrency: ci-cron
 
